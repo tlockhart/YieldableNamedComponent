@@ -1,42 +1,13 @@
-{{!-- format title and body that get yielded --}}
+{{!-- Exampl 1-2: format title and body that get sent as a block to the blogpot component --}}
+<div>{{yield to='author'}}</div>
 <div>{{yield to='title'}}</div>
 <div>{{yield to='body'}}</div>
-
-
-
-{{!-- <h1>{{@title}}</h1> --}}
-{{!-- <div class="body">{{@data.body}}</div> --}}
-{{!-- <div class="body"> --}}
-{{!-- yield a component with the value of the editStyle attribute passed down from the index Template (mark-down, foo-component, bar-component).  Note: route_post is an element in the route model.  send in
-  a named attribute called postdata---}}
-
-{{!-- EXAMPLES 1 and 3 --}}
-{{!-- <article class="blog-post">
-  <h1>{{@title}}</h1>
-  <p>{{@body}}</p>
-  <p>{{@author}}</p>
-</article> --}}
-{{!-- </div> --}}
-{{!-- EXAMPLE 4 --}}
-<div class="body">
-  {{!-- The component hash is what pulls out the different elements sent in the component in the call, and makes them available for display in the block element call.  
-  
-  Note: the hash is calling another component @editStyle=markdown-style to style and return the actual property value as an html element.--}}
-  {{!-- {{ yield (hash
-    author=(component @editStyle        
-      indexRouteDisplay=@indexRouteAuthor indexRouteColor=@indexRouteColor
-    )
-
-    title=(component @editStyle 
-      indexRouteDisplay=@indexRouteTitle indexRouteColor=@indexRouteColor
-    )
-
-    body=(component @editStyle 
-      indexRouteDisplay=@indexRouteBody indexRouteColor=@indexRouteColor)
-    )
-  }} --}}
-    {{!-- {{yield (hash
-    author=(component @editStyle)
-    title=(component @editStyle)
-    body=(component @editStyle))}} --}}
+<div>
+    {{!-- Example 4: --}}
+    {{yield (hash 
+    author = this.author)
+    to= "header"}}
+    {{yield (hash  
+    title = this.title
+    body = (component this.editStyle)) to="test"}}
 </div>
