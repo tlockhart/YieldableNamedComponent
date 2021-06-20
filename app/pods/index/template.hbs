@@ -1,0 +1,84 @@
+<h1>
+  This is Example 1: Direct call to component without handlebars component helper!
+</h1>
+{{#each @model as |post|}}
+  {{!-- {{#blog-post title=post.title}} --}}
+  {{!-- <BlogPost @title={{post.title}}>
+    {{post.author}}
+    <br />
+    {{post.body}}
+  </BlogPost> --}}
+  {{!-- Instead passing in a post and body for display we create two blocks in which they will be displayed --}}
+  <BlogPost >
+    <:title>
+      <h1>{{post.title}}</h1>
+    </:title>
+    <:body>
+      <h1>{{post.body}}</h1>
+    </:body>
+  </BlogPost>
+  {{!-- {{/blog-post}} --}}
+{{/each}}
+<h1>
+  This is Example 2: Invoking a call with the handlebars component helper.  And passing in the whole model as post
+</h1>
+{{#each @model as |post|}}
+  {{! componentName is an @model attribute, either foo-component or bar-component with an attribute sent in as args}}
+  {{component post.componentName post=post}}
+{{/each}}
+<h1>
+  This is Example 3: Invoking a specific component and passing in Named attributes!
+</h1>
+{{#each @model as |post|}}
+  {{! Invoke component directly and pass attributes}}
+  <BlogPost 
+    @title={{post.title}} 
+    @body={{post.body}} 
+    @author={{post.author}} 
+  />
+{{/each}}
+<h1>
+  This is Example 4: Pushing data attributes into a child component, and yielding it to the parent with a component
+  reference!
+</h1>
+{{#each @model as |route_post|}}
+  {{! @editStyle is a reference to the child component}}
+  <BlogPost
+    @editStyle="markdown-style"
+    @indexRouteBody={{route_post.body}}
+    @indexRouteColor={{route_post.color}}
+    @indexRouteTitle={{route_post.title}}
+    @indexRouteAuthor={{route_post.author}} as |component_ref|
+  >
+    {{log "Component_REF" component_ref}}
+    {{! Pulling the data from the component }}
+    <p>
+      Route Author:
+      {{component_ref.author}}
+    </p>
+    <p>
+      Route Title:
+      {{component_ref.title}}
+    </p>
+    <p>
+      Route Body:
+      {{component_ref.body}}
+    </p>
+  </BlogPost>
+{{/each}}
+{{!-- </DashboardElements::InstallationGroup>
+{{/each}} --}}
+<h1>
+  This is Example 5: Yield a new component
+  reference!
+</h1>
+{{#each @model as |route_post|}}
+  <DashboardElements::ElementSelector
+    @type={{route_post.type}}
+    @element={{route_post.element}} 
+    @color={{route_post.color}} as |deWrap|
+  >
+    {{component deWrap.wrapper}}
+    {{log "wrapper" deWrap.wrapper}}
+  </DashboardElements::ElementSelector>
+{{/each}}

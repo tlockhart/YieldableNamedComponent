@@ -1,0 +1,15 @@
+<div>
+
+<p style="color: {{@color}};">2. Standard Wrapper</p>
+{{!-- CALLS GENERIC_GROUP, but style with the standard Wrapper style --}}
+<b>
+{{#let (component this.dePath) as |DeComponent|}}
+<DeComponent
+  @type={{@type}}
+as |deRef|>
+Check that type passed is correct: {{deRef.componentType}}
+</DeComponent>
+{{/let}}
+</b>
+
+</div>

@@ -1,0 +1,15 @@
+{{!-- <div>
+{{yield (hash
+  deComponentPath=(component this.deComponent)
+)}}
+</div> --}}
+
+<div>
+{{yield (hash
+  wrapper=(component this.wrappingComponentPath 
+  type=@type 
+  element=@element
+  color=@color
+  dePath=this.deComponent)
+)}}
+</div>
